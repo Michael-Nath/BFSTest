@@ -1,0 +1,27 @@
+extends todo
+block add
+
+
+    form(method='POST' action="/add-task/api" id="addTask" name='addTask')
+        p Task Name
+        input(type='text', name='taskName')
+        br
+        p Task Description
+        input(type='text', name='taskDescription')
+        br
+        p Task Deadline
+        input(type='date', name='taskDate', placeholder='mm/dd/yyyy')
+        br
+        input(type='submit', value='Add Task!')
+    //script.
+    //    $("addTask").submit(e => {
+    //        e.preventDefault();
+    //        $.ajax({
+    //            url: "/add-task",
+    //            type: 'post',
+    //            data: $("addTask").serialize(),
+    //            success: () => {
+    //                console.log("Monkey Moo Everything Worked")
+    //            }
+    //        })
+    //    })
