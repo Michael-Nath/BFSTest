@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1 here are your items, #{name}:
+    ul
+        each val in tasks
+            li= val.name
+
