@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     const myTasks = await db.Tasks.findAll()
     console.log(myTasks)
     // render the view of the tasks
-    res.render('todo', {name: "Monkey Moo", tasks: myTasks});
+    res.json(myTasks)
 })
 
 module.exports = router;

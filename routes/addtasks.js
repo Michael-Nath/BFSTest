@@ -4,11 +4,12 @@ const db = require("../models");
 router.get("/", async (req, res) => {
 	const myTasks = await db.Tasks.findAll();
 	console.log(myTasks);
-	res.render("adder", { name: "Monkeys Moo", tasks: myTasks });
+	res.json({ username: "Mook" });
 });
 
-router.post("/api", async (req, res) => {
+router.post("/", async (req, res) => {
 	// retrieving information from the form that user fills out
+	console.log(req.body);
 	const newTask = req.body;
 	const newTaskName = newTask["taskName"];
 	const newTaskDescription = newTask["taskDescription"];
@@ -16,12 +17,11 @@ router.post("/api", async (req, res) => {
 	const parsedDate = new Date(newTaskDate);
 	const createdTask = await db.Tasks.create({
 		name: newTaskName,
-		description: newTaskDate,
+		description: newTaskDescription,
 		due_date: parsedDate,
 		completed: false,
 	});
-	console.log(createdTask);
-	res.send("Task Added");
+	res.json({ status: "Success!" });
 });
 
 module.exports = router;
