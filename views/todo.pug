@@ -1,8 +1,16 @@
 extends layout
 
 block content
+    
     h1 here are your items, #{name}:
     ul
         each val in tasks
-            li= val.name
+            div
+                li= val.name
+                form(method="POST" action="/remove-task/api")
+                    input(type='hidden' value=val.id name="ID")
+                    input(type='submit' value="Delete Task")
     block add
+
+    script. 
+    
