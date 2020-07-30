@@ -14,9 +14,13 @@ import Divider from "@material-ui/core/Divider";
 const useStyles = makeStyles((theme) => ({
 	root: {
 		textAlign: "center",
+		maxWidth: "500px",
 	},
 	modal: {
 		margin: "50%",
+	},
+	card: {
+		border: "2px solid black",
 	},
 }));
 
@@ -46,20 +50,22 @@ const Task = (props) => {
 	};
 
 	const editTask = () => {
-		props.setTaskID(taskID)
+		props.setTaskID(taskID);
 		props.modalFunc(true);
 	};
 
 	return (
 		<div className={classes.root}>
-			<Card>
+			<Card className={classes.card}>
 				<CardContent>
-					<Typography>
-						Task: {taskName} {taskID}
-					</Typography>
+					<Typography variant="h4">Task:</Typography>
+					<Typography>{taskName}</Typography>
 					<Divider />
-					<Typography>Task Description: {taskDescription} </Typography>
-					<Typography>Task Deadline: {taskDate} </Typography>
+					<Typography variant="h4">Description</Typography>
+					<Typography>{taskDescription} </Typography>
+					<Divider />
+					<Typography variant="h4">Deadline</Typography>
+					<Typography>{taskDate}</Typography>
 				</CardContent>
 				<CardActionArea>
 					<Button onClick={removeTask}>Remove Task</Button>
