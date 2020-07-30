@@ -1,9 +1,16 @@
 const express = require("express");
 const router = express.Router();
-
-router.post("/", (req, res) => {
-    console.log(req.body);
-    res.json({status: "Request Successfully Received"})
-})
+const db = require("../models");
+router.post("/", async (req, res) => {
+	await db.Tasks.update(
+		{ completed: !req.body.completed },
+		{
+			where: {
+				id: req.body.ID,
+			},
+		}
+	);
+	res.json({ status: "Request Successfully Received" });
+});
 
 module.exports = router;
