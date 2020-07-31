@@ -1,14 +1,8 @@
 import React from "react";
-import {
-	FormControl,
-	InputLabel,
-	Input,
-	FormHelperText,
-	Paper,
-	Typography,
-} from "@material-ui/core";
+import { InputLabel, Input, Paper, Typography } from "@material-ui/core";
 import Deadline from "./Deadline";
 import makeStyles from "@material-ui/styles/makeStyles";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -22,6 +16,15 @@ const useStyles = makeStyles((theme) => ({
 const Adder = (props) => {
 	const classes = useStyles();
 	const [date, setDate] = React.useState(new Date());
+	const [taskName, setTaskName] = React.useState("");
+	const [taskDescription, setTaskDescription] = React.useState("");
+	if (props.editTask == true) {
+		axios.get(`/get-task/${props.taskID}`).then((res) => {
+			const data = res.data;
+			setTaskName(data.name);
+			setTaskDescription(data.description);
+		});
+	}
 	return (
 		<Paper elevation={24} className={classes.root}>
 			<Typography className={classes.addTitle} variant="h3">
@@ -29,9 +32,14 @@ const Adder = (props) => {
 			</Typography>
 			<form action="/add-task" method="POST">
 				<InputLabel>Task Name</InputLabel>
-				<Input fullWidth name="taskName" multiline></Input>
+				<Input
+					defaultValue={taskName}
+					fullWidth
+					name="taskName"
+					multiline
+				></Input>
 				<InputLabel>Task Description</InputLabel>
-				<Input fullWidth name="taskDescription" multiline></Input>
+				<Input defaultValue={taskDescription} fullWidth name="taskDescription" multiline></Input>
 				<InputLabel>Due Date</InputLabel>
 				<Deadline setDate={setDate} />
 				<Input type="hidden" name="taskDate" value={date}></Input>
@@ -44,7 +52,7 @@ const Adder = (props) => {
 				<br />
 				<Input
 					type="submit"
-					value={(!props.editTask) ? "Add Task" : "Submit Edit"}
+					value={!props.editTask ? "Add Task" : "Submit Edit"}
 				></Input>
 			</form>
 		</Paper>

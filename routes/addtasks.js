@@ -1,11 +1,6 @@
 var express = require("express");
 var router = express.Router();
 const db = require("../models");
-router.get("/", async (req, res) => {
-	const myTasks = await db.Tasks.findAll();
-	console.log(myTasks);
-	res.json({ username: "Mook" });
-});
 
 router.post("/", async (req, res) => {
 	// retrieving information from the form that user fills out
@@ -39,7 +34,7 @@ router.post("/", async (req, res) => {
 		});
 	}
 
-	res.json({ status: "Success!" });
+	res.render("index");
 });
 
 module.exports = router;

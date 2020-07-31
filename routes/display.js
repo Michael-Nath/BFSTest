@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
     // grab all tasks from the database.
     const myTasks = await db.Tasks.findAll()
     console.log(myTasks)
-    // render the view of the tasks
+    // return contents of database to frontend
     res.json(myTasks)
 })
 

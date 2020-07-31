@@ -27,7 +27,7 @@ function App(props) {
 
 	const classes = useStyles();
 	React.useEffect(() => {
-		axios.get("/view-task").then((res) => {
+		axios.get("/view-tasks").then((res) => {
 			setTasks(res.data);
 		});
 	}, [deleteTasks]);

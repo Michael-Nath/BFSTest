@@ -7,7 +7,6 @@ import {
 	CardActionArea,
 	Button,
 	Typography,
-	Modal,
 } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 
@@ -19,8 +18,12 @@ const useStyles = makeStyles((theme) => ({
 	modal: {
 		margin: "50%",
 	},
-	card: {
+	cardUnmarked: {
 		border: "2px solid black",
+	},
+	cardMarked: {
+		border: "2px solid black",
+		opacity: "0.5",
 	},
 }));
 
@@ -35,7 +38,7 @@ const Task = (props) => {
 		taskCompleted,
 	} = props;
 	const [completed, markCompleted] = useState(taskCompleted);
-	const [open, setOpen] = useState(false);
+
 	const parsedDate = new Date(taskDate);
 	const removeTask = () => {
 		axios.post("/remove-task", { ID: taskID }).then((res) => {
@@ -56,7 +59,7 @@ const Task = (props) => {
 
 	return (
 		<div className={classes.root}>
-			<Card className={classes.card}>
+			<Card className={completed ? classes.cardMarked : classes.unMarked}>
 				<CardContent>
 					<Typography variant="h4">Task:</Typography>
 					<Typography>{taskName}</Typography>

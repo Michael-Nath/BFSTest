@@ -3,14 +3,11 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var displayRouter = require("./routes/display");
 var addRouter = require("./routes/addtasks");
+var displayRouter = require("./routes/display");
 var removeRouter = require("./routes/removetasks");
 var completedRouter = require("./routes/completedtasks");
-var updateRouter = require("./routes/updatetasks");
+var getTaskRouter = require("./routes/gettask");
 var app = express();
 
 // view engine setup
@@ -24,14 +21,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Express Routing
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/view-task", displayRouter);
+app.use("/view-tasks", displayRouter);
 app.use("/add-task", addRouter);
 app.use("/remove-task", removeRouter);
-app.use("/update-task", updateRouter);
 app.use("/completed-task", completedRouter);
-
+app.use("/get-task", getTaskRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
 	next(createError(404));
