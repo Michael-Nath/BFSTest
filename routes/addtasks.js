@@ -14,7 +14,6 @@ router.post("/", async (req, res) => {
 	const parsedDate = new Date(newTaskDate);
 	console.log(typeof editTask);
 	if (editTask == "true") {
-		console.log("EDITTINGGGGGGGGGG");
 		await db.Tasks.update(
 			{ name: newTaskName, description: newTaskDescription, date: newTaskDate },
 			{
@@ -33,7 +32,7 @@ router.post("/", async (req, res) => {
 			completed: false,
 		});
 	}
-
+	// this is rendered as a remedy for the form redirecting user to api endpoint. 
 	res.render("index");
 });
 

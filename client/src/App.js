@@ -19,22 +19,19 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: "10%",
 	},
 }));
-function App(props) {
+function App() {
 	const [tasks, setTasks] = React.useState([]);
 	const [deleteTasks, setDelete] = React.useState(new Date());
 	const [taskID, setTaskID] = React.useState(0);
 	const [open, setOpen] = useState(false);
 
 	const classes = useStyles();
+	// everytime a task is deleted, the tasks are reloaded. 
 	React.useEffect(() => {
 		axios.get("/view-tasks").then((res) => {
 			setTasks(res.data);
 		});
 	}, [deleteTasks]);
-
-	const handleOpen = () => {
-		setOpen(true);
-	};
 
 	const handleClose = () => {
 		setOpen(false);
