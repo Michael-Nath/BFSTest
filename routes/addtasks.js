@@ -4,7 +4,6 @@ const db = require("../models");
 
 router.post("/", async (req, res) => {
 	// retrieving information from the form that user fills out
-	console.log(req.body);
 	const newTask = req.body;
 	const currentDate = new Date();
 	const newTaskName = newTask["taskName"];
@@ -12,7 +11,6 @@ router.post("/", async (req, res) => {
 	const newTaskDate = newTask["taskDate"];
 	const editTask = newTask["edit"];
 	const parsedDate = new Date(newTaskDate);
-	console.log(typeof editTask);
 	if (editTask == "true") {
 		await db.Tasks.update(
 			{ name: newTaskName, description: newTaskDescription, date: newTaskDate },
